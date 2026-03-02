@@ -46,7 +46,13 @@
         *::after {
             box-sizing: border-box;
             margin: 0;
-            padding: 0
+            padding: 0;
+            /* border: 1px solid red; */
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
         }
 
         html {
@@ -59,6 +65,15 @@
             background: var(--white);
             overflow-x: hidden
         }
+
+        .container {
+            max-width: 1380px;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
 
         h1,
         h2,
@@ -216,14 +231,14 @@
 
         .nav-link-item {
             color: rgba(0, 0, 0, 0.7) !important;
-            font-size: .96rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: color .2s;
             padding: .3rem .6rem !important
         }
 
         .nav-link-item:hover {
-            color: white !important
+            color: rgb(172, 22, 22) !important
         }
 
         .navbar-toggler {
@@ -232,6 +247,25 @@
 
         .navbar-toggler-icon {
             filter: invert(1)
+        }
+
+        @media (max-width: 991px) {
+
+            .navbar-collapse {
+                background: white;
+                padding: 1rem;
+                margin-top: .75rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            }
+
+            .nav-link-item {
+                color: #111 !important;
+            }
+
+            .nav-link-item:hover {
+                color: var(--primary) !important;
+            }
         }
 
         /* HERO */
@@ -270,7 +304,8 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            padding: 1rem 0 4rem
+            padding: 1rem 0 4rem;
+            margin-top: 30px;
         }
 
         .hero-badge {
@@ -365,8 +400,8 @@
 
         .hero-stat-num {
             font-family: var(--font-display);
-            font-size: 2.2rem;
-            font-weight: 800;
+            font-size: 3.2rem;
+            font-weight: 700;
             color: #141b47;
             line-height: 1
         }
@@ -562,7 +597,7 @@
 
         /* ABOUT */
         #about {
-            padding: 7rem 0;
+            padding: 7rem 0rem 0rem 0rem;
             background: var(--white)
         }
 
@@ -656,7 +691,7 @@
 
         /* COURSES */
         #courses {
-            padding: 2rem 0;
+            padding: 6rem 0;
         }
 
         .courses-header {
@@ -1372,7 +1407,7 @@
         <div class="container">
             <a href="#hero" class="navbar-brand nav-logo-wrap">
                 <img src="media/logo81565.svg" alt="Christ University"
-                    style="height:54px;width:auto;object-fit:contain;">
+                    style="height:64px;width:auto;object-fit:contain;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -1525,9 +1560,17 @@
                         </div>
 
                         <div class="float-badge float-badge-1">
-                            <div class="num">25K+</div>
+                            <div class="num text-white">25K+</div>
                             <div class="lbl">Alumni Worldwide</div>
                         </div>
+                        <style>
+                            .float-badge .num {
+                                font-size: 20px;
+                                font-weight: 700;
+                                color: var(--primary);
+                                line-height: 1;
+                            }
+                        </style>
 
                     </div>
                 </div>
@@ -1886,7 +1929,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12 d-flex col-md-6 reveal" style="transition-delay:.40s">
+                <div class="col-lg-8 d-flex col-md-6 reveal" style="transition-delay:.40s">
                     <div class="course-card">
                         <div class="course-card-top">
                             <span class="course-badge">POSTGRADUATE</span>
@@ -2200,7 +2243,7 @@
     </style>
 
 
-    <section class="admission-section">
+    <section id="#admission" class="admission-section">
         <div class="container">
 
             <div class="section-header reveal">
@@ -2531,7 +2574,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-4">
                     <div class="section-tag"><i class="bi bi-question-circle-fill"></i> FAQ</div>
-                    <h2 class="section-heading" style="font-size: 70px;">Frequently Asked <span>Questions</span></h2>
+                    <h2 class="section-heading" style="font-size: 60px;">Frequently Asked <span>Questions</span></h2>
                 </div>
                 <div class="col-lg-8">
                     <div class="faq-item reveal" id="faq-0">
@@ -2674,34 +2717,6 @@
             });
         }
 
-        /* TESTIMONIAL CAROUSEL */
-        (function () {
-            var track = document.getElementById('testiTrack');
-            var dots = document.querySelectorAll('.testi-dot');
-            var current = 0;
-            var total = track.querySelectorAll('.testi-card').length;
-
-            function getPerView() { return window.innerWidth < 768 ? 1 : window.innerWidth < 992 ? 2 : 3; }
-
-            function slide(idx) {
-                var perView = getPerView();
-                var maxIdx = total - perView;
-                current = Math.max(0, Math.min(idx, maxIdx));
-                var cardW = track.querySelector('.testi-card').offsetWidth + 24;
-                track.style.transform = 'translateX(-' + (current * cardW) + 'px)';
-                dots.forEach(function (d, i) { d.classList.toggle('active', i === Math.floor(current / perView)); });
-            }
-
-            document.getElementById('testiNext').onclick = function () { slide(current + getPerView()); };
-            document.getElementById('testiPrev').onclick = function () { slide(current - getPerView()); };
-            dots.forEach(function (d) { d.onclick = function () { slide(parseInt(d.dataset.i) * getPerView()); }; });
-
-            var auto = setInterval(function () { var perView = getPerView(); slide((current + 1) > (total - perView) ? 0 : current + 1); }, 4500);
-            track.addEventListener('mouseenter', function () { clearInterval(auto); });
-            track.addEventListener('mouseleave', function () {
-                auto = setInterval(function () { var perView = getPerView(); slide((current + 1) > (total - perView) ? 0 : current + 1); }, 4500);
-            });
-        })();
 
         /* FAQ */
         function toggleFaq(idx) {
