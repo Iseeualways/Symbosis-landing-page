@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbosis landing page</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #c12112;
+            --primary-dark: #8f160d;
+            --primary-light: #e8352a;
+            --primary-glow: rgba(193, 33, 18, 0.25);
+            --secondary: #141b47;
+            --secondary-soft: #1c2459;
+            --secondary-muted: #2a3470;
+            --white: #ffffff;
+            --off-white: #f8f9fc;
+            --border: #e4e7f2;
+            --text-muted: #616888;
+            --gold: #d4aa50;
+            --font-display: 'Poppins', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --shadow-sm: 0 2px 12px rgba(20, 27, 71, .07);
+            --shadow-md: 0 8px 30px rgba(20, 27, 71, .11);
+            --shadow-lg: 0 20px 60px rgba(20, 27, 71, .15);
+            --transition: all .35s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--secondary);
+            background: var(--white);
+            overflow-x: hidden
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display)
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: .85rem;
+        }
+
+        .section-tag i {
+            font-size: .85rem
+        }
+
+        .section-heading {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-heading span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .section-heading.light {
+            color: var(--white)
+        }
+
+        .section-sub {
+            font-size: 1.02rem;
+            color: var(--text-muted);
+            line-height: 1.8
+        }
+
+        .btn-red {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: .78rem 2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: .92rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: .3px;
+        }
+
+        .btn-red:hover {
+            background: var(--primary-light);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--primary-glow)
+        }
+
+        .btn-outline-white {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: transparent;
+            color: var(--secondary);
+            padding: .78rem 2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: .92rem;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-outline-white:hover {
+            border-color: var(--secondary-muted);
+            background: rgba(255, 255, 255, .1);
+            color: var(--secondary-soft);
+            transform: translateY(-2px)
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .65s ease, transform .65s ease
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-36px);
+            transition: opacity .65s ease, transform .65s ease
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(36px);
+            transition: opacity .65s ease, transform .65s ease
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        /* NAVBAR */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(20, 27, 71, 0);
+            backdrop-filter: blur(0px);
+            transition: background .4s, backdrop-filter .4s, padding .3s, box-shadow .4s;
+        }
+
+        #navbar.scrolled {
+            background: rgb(255, 255, 255);
+            backdrop-filter: blur(14px);
+            padding: .65rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, .25);
+        }
+
+        .nav-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: .75rem
+        }
+
+        .nav-link-item {
+            color: rgba(0, 0, 0, 0.7) !important;
+            font-size: .96rem;
+            font-weight: 500;
+            transition: color .2s;
+            padding: .3rem .6rem !important
+        }
+
+        .nav-link-item:hover {
+            color: white !important
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, .3) !important
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1)
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            background: url('media/Home Banner_02.webp');
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding-top: 90px;
+        }
+
+
+
+        @keyframes orbFloat {
+
+            0%,
+            100% {
+                transform: translateY(-50%) scale(1);
+                opacity: .7
+            }
+
+            50% {
+                transform: translateY(-52%) scale(1.08);
+                opacity: 1
+            }
+        }
+
+        @keyframes slowSpin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 1rem 0 4rem
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            background: rgba(193, 33, 18, .15);
+            border: 1px solid rgba(193, 33, 18, .3);
+            border-radius: 50px;
+            padding: .4rem 1.1rem;
+            margin-bottom: 1.5rem;
+            animation: fadeUp .7s ease both;
+        }
+
+        .hero-badge-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: blink 1.6s ease-in-out infinite
+        }
+
+        .hero-badge span {
+            font-size: .72rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .8);
+            letter-spacing: 1.5px;
+            text-transform: uppercase
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .25
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.6rem, 5.5vw, 3.6rem);
+            font-weight: 800;
+            color: #141b47;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            animation: fadeUp .7s ease .1s both
+        }
+
+        .hero-title .accent {
+            color: var(--primary);
+            position: relative;
+            display: inline-block
+        }
+
+        .hero-title .accent::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+            opacity: .35;
+            border-radius: 3px
+        }
+
+        .hero-desc {
+            font-size: 1.07rem;
+            color: rgba(0, 0, 0, 0.778);
+            line-height: 1.82;
+            max-width: 540px;
+            margin-bottom: 2.5rem;
+            animation: fadeUp .7s ease .2s both
+        }
+
+        .hero-actions {
+            animation: fadeUp .7s ease .3s both
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            animation: fadeUp .7s ease .4s both;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            padding-top: 1rem
+        }
+
+        .hero-stat-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #141b47;
+            line-height: 1
+        }
+
+        .hero-stat-num span {
+            color: var(--primary)
+        }
+
+        .hero-stat-lbl {
+            font-size: .75rem;
+            color: rgba(41, 41, 41, 0.45);
+            margin-top: .25rem;
+            letter-spacing: .5px
+        }
+
+        .hero-form-card {
+            background: rgba(255, 255, 255, 0.128);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            animation: fadeLeft .8s ease .25s both;
+        }
+
+        @keyframes fadeLeft {
+            from {
+                opacity: 0;
+                transform: translateX(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .hero-form-card h3 {
+            font-size: 1.3rem;
+            color: #141b47;
+            margin-bottom: .85rem;
+            font-weight: 700
+        }
+
+        .hero-form-sub {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .45);
+            margin-bottom: 1.75rem
+        }
+
+        .form-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.132);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: var(--radius-sm);
+            padding: .65rem 1.1rem;
+            color: white;
+            font-family: var(--font-body);
+            font-size: .9rem;
+            outline: none;
+            transition: border-color .25s, background .25s;
+            margin-bottom: .9rem;
+        }
+
+        .form-field::placeholder {
+            color: rgba(50, 50, 50, 0.743)
+        }
+
+        .form-field:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, .1)
+        }
+
+        .form-field option {
+            background: var(--secondary);
+            color: white
+        }
+
+        .form-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: .4px;
+        }
+
+        .form-submit:hover {
+            background: var(--primary-light);
+            box-shadow: 0 10px 30px var(--primary-glow);
+            transform: translateY(-2px)
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: .7rem;
+            color: rgba(255, 255, 255, .3);
+            margin-top: .9rem
+        }
+
+        /* MARQUEE */
+        .marquee-section {
+            background: rgb(255, 255, 255);
+            padding: 1.2rem 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, .07);
+            border-bottom: 1px solid rgba(255, 255, 255, .07)
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 0;
+            width: max-content;
+            animation: marquee 30s linear infinite
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1rem;
+            border-right: 1px solid rgba(0, 0, 0, 0.577);
+            white-space: nowrap
+        }
+
+        .marquee-icon {
+            width: 250px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0
+        }
+
+        .marquee-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: all .3s ease;
+        }
+
+        .marquee-item:hover .marquee-icon img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+
+        .marquee-text strong {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: rgb(0, 0, 0)
+        }
+
+        .marquee-text span {
+            font-size: .90rem;
+            color: rgba(0, 0, 0, 0.45)
+        }
+
+        /* ABOUT */
+        #about {
+            padding: 7rem 0;
+            background: var(--white)
+        }
+
+        .about-visual {
+            position: relative
+        }
+
+        .about-img-main {
+            width: 100%;
+            height: 480px;
+            background: url("media/Home Banner_02.webp") center/cover no-repeat;
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .float-badge {
+            position: absolute;
+            z-index: 5;
+            padding: 1.2rem 1.6rem;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+        }
+
+        .float-badge-1 {
+            background: var(--primary);
+            bottom: -25px;
+            right: -25px;
+            color: white;
+        }
+
+        .float-badge-2 {
+            background: white;
+            top: -25px;
+            left: -25px;
+        }
+
+        .about-features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem
+        }
+
+        .about-feat {
+            display: flex;
+            align-items: flex-start;
+            gap: .8rem;
+            padding: 1.1rem;
+            background: var(--off-white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition)
+        }
+
+        .about-feat:hover {
+            border-color: rgba(193, 33, 18, .3);
+            background: rgba(193, 33, 18, .03);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm)
+        }
+
+        .about-feat-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0
+        }
+
+        .about-feat-body strong {
+            display: block;
+            font-size: .86rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: .2rem
+        }
+
+        .about-feat-body span {
+            font-size: .76rem;
+            color: var(--text-muted)
+        }
+
+        /* COURSES */
+        #courses {
+            padding: 2rem 0;
+        }
+
+        .courses-header {
+            text-align: center;
+            margin-bottom: 3.5rem
+        }
+
+        .courses-header .section-tag {
+            justify-content: center
+        }
+
+        .course-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(193, 33, 18, .2);
+        }
+
+        .course-card-top {
+            padding: 1.25rem;
+            background: linear-gradient(145deg, var(--secondary) 0%, var(--secondary-soft) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .course-checks {
+            flex-grow: 1;
+            /* THIS makes middle area flexible */
+        }
+
+        .course-footer {
+            margin-top: auto;
+            /* THIS pushes footer to bottom */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .course-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(193, 33, 18, .2)
+        }
+
+        .course-card-top {
+            padding: 1.75rem;
+            background: linear-gradient(145deg, var(--secondary) 0%, var(--secondary-soft) 100%);
+            position: relative;
+            overflow: hidden
+        }
+
+        .course-card-top::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, .04);
+            border-radius: 50%
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: rgba(193, 33, 18, .22);
+            color: #ff9f99;
+            font-size: .65rem;
+            font-weight: 700;
+            padding: .25rem .65rem;
+            border-radius: 4px;
+            letter-spacing: .7px;
+            text-transform: uppercase;
+            margin-bottom: .65rem
+        }
+
+
+
+        .course-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: white;
+            font-weight: 700;
+            line-height: 1.25
+        }
+
+        .course-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .course-meta-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap
+        }
+
+        .course-meta-pill {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .75rem;
+            color: var(--text-muted)
+        }
+
+        .course-meta-pill i {
+            font-size: .8rem;
+            color: var(--primary)
+        }
+
+        .course-desc {
+            font-size: .83rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.25rem
+        }
+
+        .course-checks {
+            margin-bottom: .5rem;
+            flex: 1
+        }
+
+        .course-check {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .8rem;
+            color: var(--secondary);
+            margin-bottom: .4rem
+        }
+
+        .course-check i {
+            color: var(--primary);
+            font-size: .75rem;
+            flex-shrink: 0
+        }
+
+        .course-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.1rem;
+            border-top: 1px solid var(--border)
+        }
+
+        .course-fee {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--secondary)
+        }
+
+        .course-fee small {
+            font-family: var(--font-body);
+            font-size: .68rem;
+            color: var(--text-muted);
+            display: block;
+            font-weight: 400
+        }
+
+        .btn-apply {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: .6rem 1.3rem;
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-size: .85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition)
+        }
+
+        .btn-apply:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px var(--primary-glow)
+        }
+
+
+        /* PLACEMENTS */
+        #placements {
+            padding: 1rem 0;
+            background: var(--off-white)
+        }
+
+        .placements-header {
+            text-align: center;
+            margin-bottom: 3.5rem
+        }
+
+        .placements-header .section-tag {
+            justify-content: center
+        }
+
+
+        /* COMPANY STRIP */
+        .company-strip {
+            background: transparent;
+            padding: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .company-track {
+            display: flex;
+            gap: 4rem;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+            align-items: center;
+        }
+
+        .company-track:hover {
+            animation-play-state: paused;
+        }
+
+        .company-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: 0.3s ease;
+        }
+
+        .company-logo img {
+            max-height: 205px;
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
+            transition: 0.3s ease;
+        }
+
+        .company-logo:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* WHY */
+        #why {
+            padding: 4rem 0;
+            background: white
+        }
+
+        .why-header {
+            text-align: center;
+            margin-bottom: 3.5rem
+        }
+
+        .why-header .section-tag {
+            justify-content: center
+        }
+
+        .why-card {
+            background: var(--off-white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            height: 100%;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            opacity: 0;
+            transition: opacity .35s
+        }
+
+        .why-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent
+        }
+
+        .why-card:hover::before {
+            opacity: 1
+        }
+
+        .why-card>* {
+            position: relative;
+            z-index: 1
+        }
+
+        .why-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-md);
+            background: rgba(193, 33, 18, .08);
+            border: 1px solid rgba(193, 33, 18, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            margin: 0 auto 1.5rem;
+            transition: var(--transition)
+        }
+
+        .why-card:hover .why-icon {
+            background: rgba(255, 255, 255, .15);
+            border-color: rgba(255, 255, 255, .2)
+        }
+
+        .why-card h5 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: .75rem;
+            transition: color .35s
+        }
+
+        .why-card p {
+            font-size: .95rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            transition: color .35s
+        }
+
+        .why-card:hover h5,
+        .why-card:hover p {
+            color: white
+        }
+
+        .why-card:hover .why-icon i {
+            filter: brightness(100)
+        }
+
+        /* FAQ */
+        #faq {
+            padding: 7rem 0;
+            background: var(--off-white)
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3.5rem
+        }
+
+        .faq-header .section-tag {
+            justify-content: center
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition)
+        }
+
+        .faq-item.open {
+            border-color: rgba(193, 33, 18, .25);
+            box-shadow: var(--shadow-sm)
+        }
+
+        .faq-q {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            gap: 1rem
+        }
+
+        .faq-q h6 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 0;
+            line-height: 1.3
+        }
+
+        .faq-toggle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            transition: var(--transition)
+        }
+
+        .faq-item.open .faq-toggle {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: rotate(90deg)
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease, padding .3s ease
+        }
+
+        .faq-a-inner {
+            padding: 0 1.75rem 1.5rem;
+            font-size: .9rem;
+            color: var(--text-muted);
+            line-height: 1.8
+        }
+
+        /* CTA */
+        #cta {
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 0;
+            background: linear-gradient(145deg, #0a0f2e 0%, var(--secondary) 100%)
+        }
+
+        .cta-bg-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(ellipse at 60% 50%, rgba(193, 33, 18, .28) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, rgba(193, 33, 18, .12) 0%, transparent 50%)
+        }
+
+        .cta-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+            background-size: 60px 60px
+        }
+
+        .cta-rings {
+            position: absolute;
+            inset: 0;
+            overflow: hidden
+        }
+
+        .cta-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(193, 33, 18, .15);
+            animation: slowSpin 30s linear infinite
+        }
+
+        .cta-ring-1 {
+            width: 700px;
+            height: 700px;
+            bottom: -200px;
+            right: -150px
+        }
+
+        .cta-ring-2 {
+            width: 450px;
+            height: 450px;
+            bottom: -100px;
+            right: 50px;
+            animation-direction: reverse;
+            animation-duration: 20s
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1560px;
+            margin: 0 auto
+        }
+
+        .cta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(193, 33, 18, .15);
+            border: 1px solid rgba(193, 33, 18, .3);
+            border-radius: 50px;
+            padding: .4rem 1.1rem;
+            margin-bottom: 1.75rem;
+            font-size: .72rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .8);
+            letter-spacing: 1.5px;
+            text-transform: uppercase
+        }
+
+        .cta-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            color: white;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.25rem
+        }
+
+        .cta-content h2 span {
+            color: var(--primary)
+        }
+
+        .cta-content p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, .6);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 1080px;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            justify-content: center
+        }
+
+        .btn-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: .3px;
+            box-shadow: 0 10px 35px var(--primary-glow)
+        }
+
+        .btn-cta-primary:hover {
+            background: var(--primary-light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 50px rgba(193, 33, 18, .4)
+        }
+
+        .cta-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2.5rem
+        }
+
+        .cta-trust-item {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .45)
+        }
+
+        .cta-trust-item i {
+            color: var(--gold);
+            font-size: .95rem
+        }
+
+        footer {
+            background: var(--secondary);
+            color: rgba(255, 255, 255, .55);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: .82rem;
+            border-top: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        footer span {
+            color: var(--primary)
+        }
+
+        #backTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 6px 20px var(--primary-glow)
+        }
+
+        #backTop.show {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        #backTop:hover {
+            transform: translateY(-3px);
+            background: var(--primary-light)
+        }
+
+        @media(max-width:991px) {
+            .hero-form-card {
+                margin-top: 3rem
+            }
+
+            .about-img-main {
+                height: 340px
+            }
+
+            .testi-card {
+                min-width: calc(50% - .75rem)
+            }
+        }
+
+        @media(max-width:767px) {
+            section {
+                padding: 5rem 0
+            }
+
+            .step-item {
+                margin-bottom: 1.5rem
+            }
+
+            .testi-card {
+                min-width: 100%
+            }
+
+            .about-features-grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero-stats {
+                gap: 1.5rem
+            }
+
+            .float-badge-1,
+            .float-badge-2 {
+                display: none
+            }
+        }
+
+        @media(max-width:575px) {
+            .hero-title {
+                font-size: 2.4rem
+            }
+
+            .section-heading {
+                font-size: 1.9rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="navbar navbar-expand-lg">
+        <div class="container">
+            <a href="#hero" class="navbar-brand nav-logo-wrap">
+                <img src="media/logo81565.svg" alt="Christ University"
+                    style="height:54px;width:auto;object-fit:contain;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+                <ul class="navbar-nav align-items-lg-center gap-lg-1 mb-2 mb-lg-0 mt-3 mt-lg-0">
+                    <li class="nav-item"><a href="#hero" class="nav-link nav-link-item">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link nav-link-item">About</a></li>
+                    <li class="nav-item"><a href="#courses" class="nav-link nav-link-item">Courses</a></li>
+                    <li class="nav-item"><a href="#admission" class="nav-link nav-link-item">Admission Process</a></li>
+                    <li class="nav-item"><a href="#placements" class="nav-link nav-link-item">Placements</a></li>
+                    <li class="nav-item"><a href="#faq" class="nav-link nav-link-item">FAQ</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a href="#cta" class="btn-red"
+                            style="border-radius:var(--radius-sm);padding:.6rem 1.4rem;font-size:.85rem">
+                            Apply Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7">
+                        <div class="hero-badge">
+                            <div class="hero-badge-dot"></div>
+                            <span class="text-dark">Admissions Open Symbiosis International, Dubai</span>
+                        </div>
+                        <h1 class="hero-title">
+                            The World Comes to Dubai,
+                            <span class="accent">At Symbiosis,</span><br>
+                            We Show You The World.
+                        </h1>
+
+
+
+
+
+                        <p class="hero-desc">
+                            Let your academics and career take off at Symbiosis International University, Dubai.
+                        </p>
+                        <div class="hero-actions d-flex flex-wrap gap-3">
+                            <a href="#courses" class="btn-red">Apply Now <i class="bi bi-arrow-right"></i></a>
+                            <a href="#admission" class="btn-outline-white"><i class="bi bi-play-circle"></i> Download
+                                Brochure</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-num">98<span>%</span></div>
+                                <div class="hero-stat-lbl">MBA Internship Placement Rate</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-num">85<span>+</span></div>
+                                <div class="hero-stat-lbl">Countries Represented</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-num">50<span>+</span></div>
+                                <div class="hero-stat-lbl">Years of Excellence</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="hero-form-card">
+                            <h3>Take The First Step Towards Your Future</h3>
+                            <input class="form-field" type="text" placeholder="Full Name" />
+                            <input class="form-field" type="email" placeholder="Email" />
+                            <input class="form-field" type="tel" placeholder="Phone" />
+                            <input class="form-field" type="text" placeholder="City" />
+                            <select class="form-field">
+                                <option value="" disabled selected>Select Course</option>
+                                <option>MBA — Business Administration</option>
+                                <option>MCA — Computer Applications</option>
+                                <option>BBA — Business Administration</option>
+                                <option>BCA — Computer Applications</option>
+                                <option>M.Com — Commerce</option>
+                                <option>MA — English Literature</option>
+                            </select>
+                            <!-- <select class="form-field">
+                                <option value="" disabled selected>Current Qualification</option>
+                                <option>12th / HSC</option>
+                                <option>Graduate</option>
+                                <option>Post Graduate</option>
+                                <option>Other</option>
+                            </select> -->
+                            <textarea class="form-field" placeholder="Message (Optional)" rows="2"
+                                style="resize:vertical;font-family:var(--font-body)"></textarea>
+                            <button class="form-submit" onclick="showAlert()">Submit <i
+                                    class="bi bi-arrow-right-circle ms-1"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-section mt-4">
+        <h2 class="section-heading text-center fs-3 mb-5">Rankings <span>&</span> Accreditations</h2>
+        <div class="marquee-track">
+            <div class="marquee-item">
+                <div class="marquee-icon"><img src="ranking logo/2000W Smart Cities Certification (2019).svg" alt="">
+                </div>
+                <div class="marquee-text"><strong>NAAC A++ Accredited</strong><span>Highest UGC Rating</span></div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-icon"><img src="ranking logo/Asia Pacific Quality Label (2019)-.svg" alt=""></div>
+                <div class="marquee-text"><strong>UGC Recognised</strong><span>100% Valid Degrees</span></div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-icon"><img src="ranking logo/Diamond Rating by QS I-GAUGE (2023).svg" alt=""></div>
+                <div class="marquee-text"><strong>Global Alumni Network</strong><span>50+ Countries</span></div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-icon"><img src="ranking logo/QS World University Rankings.svg" alt=""></div>
+                <div class="marquee-text"><strong>98% Placement Rate</strong><span>500+ Hiring Partners</span></div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-icon"><img
+                        src="ranking logo/Times Higher Education (THE) World University Rankings 2024.svg" alt=""></div>
+                <div class="marquee-text"><strong>25,000+ Students</strong><span>Active Learners</span></div>
+            </div>
+            <div class="marquee-item">
+                <div class="marquee-icon"><img
+                        src="ranking logo/Times Higher Education (THE) World University Rankings 2025.svg" alt=""></div>
+                <div class="marquee-text"><strong>Flexible Learning</strong><span>Learn Anytime, Anywhere</span></div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal-left">
+                    <div class="about-visual">
+
+                        <div class="about-img-main"></div>
+
+                        <div class="float-badge float-badge-2">
+                            <div class="num">A++</div>
+                            <div class="lbl">NAAC Grade</div>
+                        </div>
+
+                        <div class="float-badge float-badge-1">
+                            <div class="num">25K+</div>
+                            <div class="lbl">Alumni Worldwide</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal-right">
+                    <div class="section-tag"><i class="bi bi-mortarboard-fill"></i>About </div>
+
+                    <h2 class="section-heading">Symbiosis International
+                        University, <span>Dubai</span> </h2>
+                    <p class="section-sub mb-4">Symbiosis International (Deemed University) was established in 1971 by
+                        Prof. (Dr.) S.B. Mujumdar, for ‘Promoting International Understanding through Quality
+                        Education’. The Dubai campus is known for its excellent infrastructure and international
+                        exposure and is one of the Indian universities in UAE. With various national and international
+                        accolades to their name, Symbiosis International University, Dubai has set a standard for
+                        excellence in education and earned their name amongst top Indian universities in Dubai. </p>
+                    <p class="section-sub">Centrally located in the heart of Dubai Knowledge Park, the campus carries
+                        forward a legacy of 50+ years of educational excellence to a dynamic city. The exact symbiosis
+                        international university address is Symbiosis International University, Building 14 Dubai
+                        Knowledge Park.</p>
+                    <p class="section-sub">The campus offers various internationally accredited programmes in computer
+                        science, psychology, management, media studies, and engineering. Therefore, you are likely to
+                        find this university on every list of Indian universities approved by the UAE.
+                    </p>
+                    <!-- <div class="about-features-grid mt-4">
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><i class="bi bi-patch-check-fill"></i></div>
+                            <div class="about-feat-body"><strong>UGC Recognised</strong><span>Fully accredited online
+                                    degrees valid nationwide</span></div>
+                        </div>
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><i class="bi bi-camera-video-fill"></i></div>
+                            <div class="about-feat-body"><strong>Live &amp; Recorded Classes</strong><span>Learn at your
+                                    pace with both live &amp; recorded sessions</span></div>
+                        </div>
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><i class="bi bi-people-fill"></i></div>
+                            <div class="about-feat-body"><strong>Expert Faculty</strong><span>PhD &amp;
+                                    industry-experienced professors</span></div>
+                        </div>
+                        <div class="about-feat">
+                            <div class="about-feat-icon"><i class="bi bi-briefcase-fill"></i></div>
+                            <div class="about-feat-body"><strong>Placement Support</strong><span>Dedicated career cell
+                                    with 500+ hiring partners</span></div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses">
+        <div class="container">
+            <div class="courses-header reveal">
+                <div class="section-tag"><i class="bi bi-grid-fill"></i> Our Programmes</div>
+                <h2 class="section-heading">Symbiosis International <span>University Courses</span></h2>
+                <p class="section-sub">Our programmes are designed to combine academic
+                    excellence with industry relevance, preparing students for global careers across business,
+                    technology, media, psychology, engineering, and management. The Symbiosis International University,
+                    Dubai fees is mentioned below to help you make your decision. </p>
+            </div>
+            <div class="row g-4">
+                <!-- MBA -->
+                <div class="col-lg-12 d-flex col-md-6 reveal" style="transition-delay:.0s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">💼</span> -->
+                            <div class="course-title">Bachelor of Business Administration (BBA) (Hons)</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 120 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">Build a strong foundation in management, marketing, finance, and
+                                entrepreneurship. The programme develops leadership abilities, strategic thinking, and
+                                business acumen suited for dynamic global markets.</p>
+                            <div class="course-checks">
+                                <h6><Strong>Specialisations Offered:</Strong></h6>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Marketing |
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Finance |
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Logistics And Supply
+                                    Chain |</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Human Resource
+                                    Management |
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Accounting and Finance
+                                </div>
+                            </div>
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- MCA -->
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.08s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">💻</span> -->
+                            <div class="course-title">Bachelor of Business Administration- Dual Degree</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years (as per pathway)
+                                </div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 100 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">An internationally integrated programme offering global exposure and
+                                cross-border academic experience. Designed for students seeking international mobility
+                                and broader career opportunities. Upon graduation, you will hold a BBA from Symbiosis
+                                International University, Dubai and a B.Sc from Aston University, UK.
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Artificial
+                                    Intelligence &amp; ML</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Cloud Computing
+                                    (AWS/Azure)</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Full Stack Development
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Capstone Live Projects
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BBA -->
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.16s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">📊</span> -->
+                            <div class="course-title">Bachelor of Computer Applications (BCA)</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 180 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">A technology-focused programme covering programming, software
+                                development, databases, and emerging digital technologies, preparing students for
+                                careers in IT and software industries.
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Business Ethics &amp;
+                                    Law</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Financial Accounting
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Entrepreneurship
+                                    Development</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Internship Support
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BCA -->
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.24s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">🖥️</span> -->
+                            <div class="course-title">Bachelor of Arts in Mass Communication (BAMC)</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 180 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">Focused on media studies, journalism, digital communication,
+                                advertising, and public relations, this programme prepares students for the evolving
+                                media and communication landscape.
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Python &amp; Java
+                                    Programming</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Database Management
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Web Development</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Software Engineering
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- M.Com -->
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.32s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">📈</span> -->
+                            <div class="course-title">B.Com with ACCA Preparation</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 100 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">A commerce programme integrated with ACCA preparation, enabling
+                                students to prepare for a globally recognised accounting qualification alongside their
+                                degree.
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Advanced Taxation
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Corporate Finance
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> International Business
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Research Methodology
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- MA -->
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.40s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">✍️</span> -->
+                            <div class="course-title">B.Com (Honors) with ACCA Preparation</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 100 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">An advanced commerce programme offering deeper specialization in
+                                finance and accounting, combined with ACCA preparation for global career prospects.
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Critical Theory &amp;
+                                    Analysis</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Creative Writing
+                                    Workshop</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Literary Research
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Communication Skills
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.40s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">✍️</span> -->
+                            <div class="course-title">B.Sc Psychology (Honors)</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 100 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">A research-oriented programme covering behavioural science, cognitive
+                                psychology, and applied psychology, preparing students for careers in mental health, HR,
+                                and research. The university also offers an exit option after 3 years with a B.Sc degree
+                                in Psychology.
+
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Critical Theory &amp;
+                                    Analysis</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Creative Writing
+                                    Workshop</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Literary Research
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Communication Skills
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">42,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 d-flex col-md-6 reveal" style="transition-delay:.40s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">UNDERGRADUATE</span>
+                            <!-- <span class="course-emoji">✍️</span> -->
+                            <div class="course-title">B.Tech in Computer Engineering</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 4 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 100 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">A comprehensive engineering programme focused on computing systems,
+                                software technologies, AI fundamentals, and advanced engineering applications with a
+                                heavy focus on emerging technologies, AI solutions, gaming design development, and
+                                cybersecurity.
+
+
+                            </p>
+                            <!-- <div class="course-checks">
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Critical Theory &amp;
+                                    Analysis</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Creative Writing
+                                    Workshop</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Literary Research
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Communication Skills
+                                </div>
+                            </div> -->
+                            <div class="course-footer">
+                                <div class="course-fee">53,550 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 d-flex col-md-6 reveal" style="transition-delay:.40s">
+                    <div class="course-card">
+                        <div class="course-card-top">
+                            <span class="course-badge">POSTGRADUATE</span>
+                            <!-- <span class="course-emoji">✍️</span> -->
+                            <div class="course-title">Master of Business Administration (MBA)</div>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-meta-row">
+                                <div class="course-meta-pill"><i class="bi bi-clock-fill"></i> 2 Years</div>
+                                <!-- <div class="course-meta-pill"><i class="bi bi-journal-fill"></i> 100 Credits</div>
+                                <div class="course-meta-pill"><i class="bi bi-wifi"></i> Online</div> -->
+                            </div>
+                            <p class="course-desc">A globally focused postgraduate programme designed to develop
+                                strategic leaders with expertise in management, innovation, analytics, and
+                                decision-making.The Symbiosis International University, Dubai MBA fees structure is
+                                designed in accordance with the amenities offered and the infrastructure available.
+
+
+
+                            </p>
+                            <div class="course-checks">
+                                <h6><Strong>Specialisations Offered:</Strong></h6>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Marketing |</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Finance |</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> International Business
+                                    |
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Operations |</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Business Analytics |
+                                </div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Strategy, Management &
+                                    Leadership |</div>
+                                <div class="course-check"><i class="bi bi-check-circle-fill"></i> Innovation
+                                    Entrepreneurship</div>
+                            </div>
+                            <div class="course-footer">
+                                <div class="course-fee">45,000 AED <small>Annual Tuition Fees</small></div>
+                                <button class="btn-apply" onclick="showAlert()">Apply Now <i
+                                        class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <style>
+        :root {
+            --red: #c12112;
+            --red-dark: #8f1509;
+            --red-light: #f9ecea;
+            --ink: #0f0d0c;
+            --muted: #7a7572;
+            --border: #e8e4e2;
+            --bg: #faf9f7;
+            --white: #ffffff;
+        }
+
+        /* ── Section ─────────────────────────────── */
+        .admission-section {
+            background: linear-gradient(to top, #141b47, #141b4700, white);
+            padding: 7rem 2rem 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle background texture */
+        .admission-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 40% at 0% 20%, rgba(193, 33, 18, 0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 100% 80%, rgba(193, 33, 18, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+
+
+        /* ── Header ─────────────────────────────── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            font-size: .72rem;
+            font-weight: 500;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 1.2rem;
+        }
+
+        .section-eyebrow::before,
+        .section-eyebrow::after {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--red);
+            opacity: .5;
+        }
+
+        .section-title {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--ink);
+            letter-spacing: -.01em;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--red);
+        }
+
+        /* ── Grid ─────────────────────────────── */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        /* ── Card ─────────────────────────────── */
+        .process-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.8rem 2.4rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow .4s ease, transform .4s ease;
+        }
+
+        .process-card:hover {
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.09);
+            transform: translateY(-4px);
+        }
+
+        /* Red accent bar */
+        .process-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--red-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .process-card.in-view::before {
+            transform: scaleX(1);
+        }
+
+        /* Card tag */
+        .card-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            background: var(--red-light);
+            color: var(--red);
+            font-size: .7rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: .35rem .8rem;
+            border-radius: 999px;
+            margin-bottom: 1.4rem;
+        }
+
+        .card-tag svg {
+            width: 12px;
+            height: 12px;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2.4rem;
+            line-height: 1.2;
+            color: var(--ink);
+        }
+
+        /* ── Timeline ─────────────────────────── */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.2rem;
+            position: relative;
+        }
+
+        /* Connector line */
+        .step-track {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .step-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: var(--white);
+            color: var(--muted);
+            font-size: .92rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 2;
+            transition: all .5s cubic-bezier(.4, 0, .2, 1);
+            letter-spacing: .05em;
+        }
+
+        .step-line {
+            width: 1px;
+            flex: 1;
+            background: linear-gradient(to bottom, var(--border), transparent);
+            min-height: 28px;
+        }
+
+        .step:last-child .step-line {
+            display: none;
+        }
+
+        .step-body {
+            padding-bottom: 0.6rem;
+            flex: 1;
+        }
+
+        .step:last-child .step-body {
+            padding-bottom: 0;
+        }
+
+        .step-title {
+            font-size: .92rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: .3rem;
+            line-height: 1.3;
+        }
+
+        .step-desc {
+            font-size: .82rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        /* Active state */
+        .step.lit .step-circle {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+            box-shadow: 0 0 0 5px rgba(193, 33, 18, .12);
+        }
+
+        /* ── Reveal ─────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal:nth-child(2) {
+            transition-delay: .15s;
+        }
+
+        /* ── Responsive ─────────────────────────── */
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .process-card {
+                padding: 2rem 1.6rem;
+            }
+
+            .admission-section {
+                padding: 5rem 1.2rem 6rem;
+            }
+        }
+    </style>
+
+
+    <section class="admission-section">
+        <div class="container">
+
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="bi bi-bar-chart-steps"></i> Admission process</div>
+                <h2 class="section-heading">Symbiosis International University Dubai <span>Admission Process </span>
+                </h2>
+                <p class="section-sub"> To get admitted into one of the Symbiosis International University courses you
+                    have to follow the admission process of the university. This process is mentioned in detail below to
+                    help you familiarise yourself with it.
+                </p>
+            </div>
+
+            <div class="process-grid">
+
+                <!-- UG Card -->
+                <div class="process-card reveal">
+                    <span class="card-tag">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
+                        Undergraduate
+                    </span>
+                    <h3 class="card-title">UG Admission Process</h3>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">01</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Submit Application</p>
+                                <p class="step-desc">Upload Grade 10 &amp; 12 results, English proficiency proof, SOP,
+                                    letter of recommendation &amp; passport.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">02</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Application Review</p>
+                                <p class="step-desc">Our admissions team evaluates your documents and academic profile.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">03</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Conditional Offer</p>
+                                <p class="step-desc">Receive your offer letter along with any applicable scholarship
+                                    details.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">04</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Confirm Acceptance</p>
+                                <p class="step-desc">Pay the AED 250 registration fee plus 10% of tuition to secure your
+                                    place.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">05</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Final Admission</p>
+                                <p class="step-desc">Complete remaining installment, initiate visa processing &amp;
+                                    submit
+                                    final document verification.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PG Card -->
+                <div class="process-card reveal">
+                    <span class="card-tag">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" />
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                        </svg>
+                        Postgraduate
+                    </span>
+                    <h3 class="card-title">PG Admission Process</h3>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">01</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Submit Application</p>
+                                <p class="step-desc">Upload bachelor's transcripts, English proficiency proof, SOP, CV
+                                    &amp;
+                                    passport.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">02</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Review &amp; Interview</p>
+                                <p class="step-desc">Shortlisted candidates are invited for an academic interview with
+                                    the
+                                    faculty.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">03</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Conditional Offer</p>
+                                <p class="step-desc">Receive your offer letter along with any applicable scholarship
+                                    details.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">04</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Confirm Acceptance</p>
+                                <p class="step-desc">Pay the AED 250 registration fee plus 10% of tuition to secure your
+                                    place.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-track">
+                                <div class="step-circle">05</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-body">
+                                <p class="step-title">Final Admission</p>
+                                <p class="step-desc">Complete remaining installment, initiate visa processing &amp;
+                                    submit
+                                    final document verification.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+
+                    // Stagger step activation
+                    if (entry.target.classList.contains('process-card')) {
+                        const steps = entry.target.querySelectorAll('.step');
+                        steps.forEach((step, i) => {
+                            setTimeout(() => step.classList.add('lit'), 300 + i * 180);
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal, .process-card').forEach(el => observer.observe(el));
+    </script>
+
+
+
+    <!-- PLACEMENTS -->
+    <section id="placements">
+        <div class="container mt-5">
+            <div class="placements-header reveal">
+                <div class="section-tag"><i class="bi bi-star-fill"></i> Student Placements</div>
+                <h2 class="section-heading">Industry<span> Partnerships</span></h2>
+                <p class="section-sub ">To provide students with the best opportunities after graduation, the university
+                    has partnered with various organisations that add extra-curricular value to the education obtained.
+                    This is just one of the many reasons the Symbiosis International University, Dubai ranking has been
+                    consistently high.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- COMPANY STRIP -->
+        <div class="company-strip">
+            <div class="company-track">
+
+                <div class="company-logo">
+                    <img src="partners/Aston University Birmingham.svg" alt="Amazon">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/Cisco Networking Academy.svg" alt="Google">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/Cyber Secured India.svg" alt="Microsoft">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/Deakin University.svg" alt="TCS">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/EDNex.svg" alt="Infosys">
+                </div>
+
+                <!-- Duplicate Same Logos Again For Infinite Loop -->
+                <div class="company-logo">
+                    <img src="partners/Edu Scan Institute.svg" alt="Amazon">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/Institute of Electrical and Electronics Engineers (IEEE).svg" alt="Google">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/Integrated Data Services (IDS).svg" alt="Microsoft">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/PwC.svg" alt="Microsoft">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/The National HRD Network (TNHRDN).svg" alt="Microsoft">
+                </div>
+
+                <div class="company-logo">
+                    <img src="partners/Thrive HQ.svg" alt="Microsoft">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why">
+        <div class="container">
+            <div class="why-header reveal">
+                <div class="section-tag"><i class="bi bi-lightning-fill"></i> Why Christ Online</div>
+                <h2 class="section-heading">Why Choose <span>Symbiosis University,</span> Dubai</h2>
+                <p class="section-sub ">Symbiosis International University, Dubai offers a globally recognised education
+                    rooted in academic excellence, industry relevance, and international exposure. Backed by strong
+                    global rankings and a legacy of quality education, the university combines rigorous academics with
+                    practical learning, experienced faculty, and a multicultural campus environment.
+                    With programmes aligned to evolving industry demands, integrated professional certifications, and
+                    strong career support, students graduate with the skills, confidence, and global perspective needed
+                    to succeed in competitive international markets.<br>
+                    <br>
+                    Here are some reasons why you should consider joining Symbiosis International University, Dubai for
+                    your studies.
+
+                </p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.0s">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="bi bi-award-fill" style="color:var(--primary)"></i></div>
+                        <h5>Accreditation</h5>
+                        <p>Among the first Indian universities in the UAE to earn CAA and MOE accreditation.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.1s">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="bi bi-laptop-fill" style="color:var(--primary)"></i></div>
+                        <h5>Global Recognition</h5>
+                        <p>Degrees awarded by Symbiosis International (Deemed University), one of India’s top-ranked
+                            institutions with a strong global reputation.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.2s">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="bi bi-people-fill" style="color:var(--primary)"></i></div>
+                        <h5>Future-Ready Education</h5>
+                        <p> Industry-integrated programs centered on innovation, entrepreneurship, and emerging
+                            technologies.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.4s">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="bi bi-bank2" style="color:var(--primary)"></i></div>
+                        <h5>Diverse Learning Community</h5>
+                        <p>A multicultural campus that fosters international outlooks, collaboration, and inclusive
+                            growth.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 reveal" style="transition-delay:.3s">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="bi bi-briefcase-fill" style="color:var(--primary)"></i></div>
+                        <h5>Strategic Advantage</h5>
+                        <p>Located in Dubai Knowledge Park, providing direct access to internships, industry
+                            partnerships, and global career pathways.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="faq-header reveal">
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <div class="section-tag"><i class="bi bi-question-circle-fill"></i> FAQ</div>
+                    <h2 class="section-heading" style="font-size: 70px;">Frequently Asked <span>Questions</span></h2>
+                </div>
+                <div class="col-lg-8">
+                    <div class="faq-item reveal" id="faq-0">
+                        <div class="faq-q" onclick="toggleFaq(0)">
+                            <h6>Are degrees from Symbiosis International University, Dubai globally recognised?</h6>
+                            <div class="faq-toggle"><i class="bi bi-plus"></i></div>
+                        </div>
+                        <div class="faq-a" id="faq-a-0">
+                            <div class="faq-a-inner"> Yes. Degrees are awarded by Symbiosis International (Deemed
+                                University), a globally ranked institution recognised for academic excellence and
+                                international credibility.
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal" id="faq-1" style="transition-delay:.08s">
+                        <div class="faq-q" onclick="toggleFaq(1)">
+                            <h6>What programmes are offered at Symbiosis International University, Dubai?</h6>
+                            <div class="faq-toggle"><i class="bi bi-plus"></i></div>
+                        </div>
+                        <div class="faq-a" id="faq-a-1">
+                            <div class="faq-a-inner"> The university offers undergraduate programmes including BBA, BBA
+                                Dual Degree, BCA, BAMC, B.Com (with ACCA), B.Com (Hons) with ACCA, BSc Psychology
+                                (Hons), B.Tech in Computer Engineering, and a postgraduate MBA programme.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal" id="faq-2" style="transition-delay:.16s">
+                        <div class="faq-q" onclick="toggleFaq(2)">
+                            <h6>What is the admission process for undergraduate and postgraduate programmes?
+                            </h6>
+                            <div class="faq-toggle"><i class="bi bi-plus"></i></div>
+                        </div>
+                        <div class="faq-a" id="faq-a-2">
+                            <div class="faq-a-inner"> The process includes application submission, document review,
+                                issuance of a conditional offer (if eligible), fee payment for confirmation, provisional
+                                admission, and final admission confirmation upon completion of required payments and
+                                document verification.
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal" id="faq-3" style="transition-delay:.24s">
+                        <div class="faq-q" onclick="toggleFaq(3)">
+                            <h6>Is English proficiency mandatory for admission?
+                            </h6>
+                            <div class="faq-toggle"><i class="bi bi-plus"></i></div>
+                        </div>
+                        <div class="faq-a" id="faq-a-3">
+                            <div class="faq-a-inner"> Yes. Applicants must meet the required English proficiency
+                                criteria (IELTS / TOEFL) or equivalent academic English requirements, depending on the
+                                programme level.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal" id="faq-4" style="transition-delay:.32s">
+                        <div class="faq-q" onclick="toggleFaq(4)">
+                            <h6>Does the university provide scholarship opportunities?
+                            </h6>
+                            <div class="faq-toggle"><i class="bi bi-plus"></i></div>
+                        </div>
+                        <div class="faq-a" id="faq-a-4">
+                            <div class="faq-a-inner"> Yes, eligible students may receive a Symbiosis International
+                                University, Dubai scholarship based on academic performance, predicted grades, or
+                                previous qualifications.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-bg-pattern"></div>
+        <div class="cta-grid-lines"></div>
+        <div class="cta-rings">
+            <div class="cta-ring cta-ring-1"></div>
+            <div class="cta-ring cta-ring-2"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2>Begin your global journey with <span>Symbiosis International University,</span> Dubai.</h2>
+                <p>Join a university that blends international recognition, industry-focused learning, and the dynamic
+                    advantage of Dubai to shape your future without borders.</p>
+                <div class="cta-actions">
+                    <button class="btn-cta-primary" onclick="showAlert()"><i class="bi bi-play-circle-fill"></i>Start
+                        Your Application Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-chevron-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* NAVBAR SCROLL */
+        window.addEventListener('scroll', function () {
+            const scrollY = window.scrollY;
+            document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+            document.getElementById('backTop').classList.toggle('show', scrollY > 400);
+
+            // Reveal
+            document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function (el) {
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
+            });
+
+            // Steps popup
+            document.querySelectorAll('.step-item').forEach(function (el) {
+                if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+                    var delay = parseInt(el.dataset.delay) || 0;
+                    setTimeout(function () { el.classList.add('pop'); }, delay);
+                }
+            });
+
+            // Counter
+            var snap = document.getElementById('snapshot');
+            if (snap && snap.getBoundingClientRect().top < window.innerHeight - 100 && !snap.dataset.counted) {
+                snap.dataset.counted = '1';
+                setTimeout(animateCounters, 300);
+            }
+        }, { passive: true });
+
+        /* COUNTERS */
+        function animateCounters() {
+            document.querySelectorAll('.stat-num[data-target]').forEach(function (el) {
+                var target = parseFloat(el.dataset.target);
+                var suffix = el.dataset.suffix;
+                var isDecimal = target % 1 !== 0;
+                var start = 0, duration = 1800, step = 16;
+                var increment = target / (duration / step);
+                var timer = setInterval(function () {
+                    start += increment;
+                    if (start >= target) { start = target; clearInterval(timer); }
+                    el.textContent = (isDecimal ? start.toFixed(1) : Math.floor(start)) + suffix;
+                }, step);
+            });
+        }
+
+        /* TESTIMONIAL CAROUSEL */
+        (function () {
+            var track = document.getElementById('testiTrack');
+            var dots = document.querySelectorAll('.testi-dot');
+            var current = 0;
+            var total = track.querySelectorAll('.testi-card').length;
+
+            function getPerView() { return window.innerWidth < 768 ? 1 : window.innerWidth < 992 ? 2 : 3; }
+
+            function slide(idx) {
+                var perView = getPerView();
+                var maxIdx = total - perView;
+                current = Math.max(0, Math.min(idx, maxIdx));
+                var cardW = track.querySelector('.testi-card').offsetWidth + 24;
+                track.style.transform = 'translateX(-' + (current * cardW) + 'px)';
+                dots.forEach(function (d, i) { d.classList.toggle('active', i === Math.floor(current / perView)); });
+            }
+
+            document.getElementById('testiNext').onclick = function () { slide(current + getPerView()); };
+            document.getElementById('testiPrev').onclick = function () { slide(current - getPerView()); };
+            dots.forEach(function (d) { d.onclick = function () { slide(parseInt(d.dataset.i) * getPerView()); }; });
+
+            var auto = setInterval(function () { var perView = getPerView(); slide((current + 1) > (total - perView) ? 0 : current + 1); }, 4500);
+            track.addEventListener('mouseenter', function () { clearInterval(auto); });
+            track.addEventListener('mouseleave', function () {
+                auto = setInterval(function () { var perView = getPerView(); slide((current + 1) > (total - perView) ? 0 : current + 1); }, 4500);
+            });
+        })();
+
+        /* FAQ */
+        function toggleFaq(idx) {
+            var item = document.getElementById('faq-' + idx);
+            var ans = document.getElementById('faq-a-' + idx);
+            var wasOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(function (el) {
+                el.classList.remove('open');
+                el.querySelector('.faq-a').style.maxHeight = '0';
+                el.querySelector('.faq-toggle').innerHTML = '<i class="bi bi-plus"></i>';
+            });
+            if (!wasOpen) {
+                item.classList.add('open');
+                ans.style.maxHeight = ans.scrollHeight + 'px';
+                item.querySelector('.faq-toggle').innerHTML = '<i class="bi bi-x"></i>';
+            }
+        }
+
+
+
+        /* INIT REVEAL ON LOAD */
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function (el) {
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
+            });
+        });
+    </script>
+</body>
+
+</html>
