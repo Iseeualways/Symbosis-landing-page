@@ -40,7 +40,7 @@
                     <li class="nav-item"><a href="#faq" class="nav-link nav-link-item">FAQs</a></li>
                     <li class="nav-item"><a href="#cta" class="nav-link nav-link-item">Get In Touch</a></li>
                     <li class="nav-item ms-lg-2">
-                        <a href="#cta" class="btn-red"
+                        <a href="#" class="btn-red"
                             style="border-radius:var(--radius-sm);padding:.6rem 1.4rem;font-size:.85rem">
                             Apply Now <i class="bi bi-arrow-right"></i>
                         </a>
@@ -74,8 +74,8 @@
                             Let your academics and career take off at Symbiosis International University, Dubai.
                         </p>
                         <div class="hero-actions d-flex flex-wrap gap-3">
-                            <a href="#courses" class="btn-red">Apply Now <i class="bi bi-arrow-right"></i></a>
-                            <a href="#admission" class="btn-outline-white"><i class="bi bi-cloud-arrow-down-fill"></i>
+                            <a href="#" class="btn-red">Apply Now <i class="bi bi-arrow-right"></i></a>
+                            <a href="#" class="btn-outline-white"><i class="bi bi-cloud-arrow-down-fill"></i>
                                 Download
                                 Brochure</a>
                         </div>
@@ -180,8 +180,9 @@
                         </div>
 
                         <div class="float-badge float-badge-1">
-                           
-                            <div class="lbl text-center">Partnerships with  <div class="num text-white text-center">15+</div> organisations</div>
+
+                            <div class="lbl text-center">Partnerships with <div class="num text-white text-center">15+
+                                </div> organisations</div>
                         </div>
                         <style>
                             .float-badge .num {
@@ -843,35 +844,46 @@
         </div>
 
 
-        <div class="company-container">
+        <section class="company-strip container">
+            <div class="company-container">
 
-            <!-- Left Arrow -->
-            <button class="arrow arrow-left">&#10094;</button>
+                <!-- Left Arrow -->
+                <button class="arrow arrow-left" aria-label="Previous">&#10094;</button>
 
-            <!-- Scroll Wrapper -->
-            <div class="company-wrapper p-3">
-                <div class="company-track">
-
-                    <div class="company-logo"><img src="partners/Aston University Birmingham.svg"></div>
-                    <div class="company-logo"><img src="partners/Cisco Networking Academy.svg"></div>
-                    <div class="company-logo"><img src="partners/Cyber Secured India.svg"></div>
-                    <div class="company-logo"><img src="partners/Deakin University.svg"></div>
-                    <div class="company-logo"><img src="partners/EDNex.svg"></div>
-                    <div class="company-logo"><img src="partners/Edu Scan Institute.svg"></div>
-                    <div class="company-logo"><img
-                            src="partners/Institute of Electrical and Electronics Engineers (IEEE).svg"></div>
-                    <div class="company-logo"><img src="partners/Integrated Data Services (IDS).svg"></div>
-                    <div class="company-logo"><img src="partners/PwC.svg"></div>
-                    <div class="company-logo"><img src="partners/The National HRD Network (TNHRDN).svg"></div>
-                    <div class="company-logo"><img src="partners/Thrive HQ.svg"></div>
-
+                <!-- Scroll Wrapper -->
+                <div class="company-wrapper">
+                    <div class="company-track">
+                        <div class="company-logo"><img src="partners/Aston University Birmingham.svg"
+                                alt="Aston University Birmingham"></div>
+                        <div class="company-logo"><img src="partners/Cisco Networking Academy.svg"
+                                alt="Cisco Networking Academy"></div>
+                        <div class="company-logo"><img src="partners/Cyber Secured India.svg" alt="Cyber Secured India">
+                        </div>
+                        <div class="company-logo"><img src="partners/Deakin University.svg" alt="Deakin University">
+                        </div>
+                        <div class="company-logo"><img src="partners/EDNex.svg" alt="EDNex"></div>
+                        <div class="company-logo"><img src="partners/Edu Scan Institute.svg" alt="Edu Scan Institute">
+                        </div>
+                        <div class="company-logo"><img
+                                src="partners/Institute of Electrical and Electronics Engineers (IEEE).svg" alt="IEEE">
+                        </div>
+                        <div class="company-logo"><img src="partners/Integrated Data Services (IDS).svg" alt="IDS">
+                        </div>
+                        <div class="company-logo"><img src="partners/PwC.svg" alt="PwC"></div>
+                        <div class="company-logo"><img src="partners/The National HRD Network (TNHRDN).svg"
+                                alt="TNHRDN"></div>
+                        <div class="company-logo"><img src="partners/Thrive HQ.svg" alt="Thrive HQ"></div>
+                    </div>
                 </div>
+
+                <!-- Right Arrow -->
+                <button class="arrow arrow-right" aria-label="Next">&#10095;</button>
+
             </div>
 
-            <!-- Right Arrow -->
-            <button class="arrow arrow-right">&#10095;</button>
-
-        </div>
+            <!-- Dot Indicators -->
+            <div class="dots" id="dots"></div>
+        </section>
     </section>
 
     <!-- WHY -->

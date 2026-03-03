@@ -912,92 +912,156 @@
   }
 
 
-  /* COMPANY STRIP */
+  /* ── STRIP ─────────────────────────────────────────── */
   .company-strip {
-      padding: 2rem 0;
-      background: #fff;
+      width: 100%;
+      border-radius: 16px;
+      padding: 0.2rem 0;
+     
   }
 
+  /* ── CONTAINER ─────────────────────────────────────── */
   .company-container {
       position: relative;
-      max-width: 1200px;
-      margin: auto;
       display: flex;
       align-items: center;
+      padding: 0 16px;
+      gap: 10px;
   }
 
+  /* ── WRAPPER (clip window) ─────────────────────────── */
   .company-wrapper {
-      overflow-x: auto;
-      scroll-behavior: smooth;
+      overflow: hidden;
       flex: 1;
-      cursor: grab;
   }
 
-  .company-wrapper::-webkit-scrollbar {
-      display: none;
-  }
-
+  /* ── TRACK (moving strip) ──────────────────────────── */
   .company-track {
       display: flex;
-      gap: 4rem;
-      padding: 0 20px;
+      gap: 3rem;
+      padding: 8px 20px;
+      /* smooth CSS transition driven by JS transform */
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
   }
 
+  /* ── LOGO CARD ─────────────────────────────────────── */
   .company-logo {
       min-width: 160px;
-      height: 60px;
+      height: 70px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
   }
 
   .company-logo img {
-      max-height: 95px;
+      max-height: 80px;
+      max-width: 150px;
       object-fit: contain;
       pointer-events: none;
-      transition: 0.3s ease;
+      filter: grayscale(30%);
+      transition: filter 0.3s ease, transform 0.3s ease;
   }
 
   .company-logo:hover img {
-      transform: scale(1.05);
+      filter: grayscale(0%);
+      transform: scale(1.08);
   }
 
-  /* Arrow Buttons */
+  /* ── ARROWS ────────────────────────────────────────── */
   .arrow {
-      width: 25px;
-      height: 25px;
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: none;
       background: var(--primary);
-      color: white;
-      font-size: 16px;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1;
       cursor: pointer;
-      transition: 0.3s ease;
-      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s, opacity 0.2s;
+      box-shadow: 0 2px 8px rgba(26, 86, 219, .35);
   }
 
   .arrow:hover {
-      transform: scale(1.1);
+      background: #1648c0;
+      transform: scale(1.12);
   }
 
-  .arrow-left {
-      margin-right: 10px;
+  .arrow:active {
+      transform: scale(0.96);
   }
 
-  .arrow-right {
-      margin-left: 10px;
+  .arrow:disabled {
+      opacity: .35;
+      cursor: default;
+      transform: none;
   }
 
-  /* Mobile */
+  /* ── DOTS ──────────────────────────────────────────── */
+  .dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 1.5rem;
+  }
+
+  .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #d1d5db;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      padding: 0;
+  }
+
+  .dot.active {
+      background: var(--primary);
+      transform: scale(1.35);
+  }
+
+  /* ── RESPONSIVE ────────────────────────────────────── */
   @media (max-width: 768px) {
-      .arrow {
-          width: 35px;
-          height: 35px;
-          font-size: 16px;
+      .company-strip {
+          padding: 2rem 0;
+          border-radius: 0;
+      }
+
+      .company-logo {
+          min-width: 130px;
+          height: 60px;
+      }
+
+      .company-logo img {
+          max-height: 50px;
+          max-width: 120px;
       }
 
       .company-track {
           gap: 2rem;
+      }
+
+      .arrow {
+          width: 32px;
+          height: 32px;
+          font-size: 13px;
+      }
+  }
+
+  @media (max-width: 480px) {
+      .company-logo {
+          min-width: 110px;
+      }
+
+      .company-track {
+          gap: 1.5rem;
       }
   }
 
@@ -1305,65 +1369,67 @@
       transform: translateY(-3px);
       box-shadow: 0 18px 50px rgba(193, 33, 18, .4)
   }
-.cta-trust {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    margin-top: 2.5rem;
-}
 
-/* Address (Top) */
-.cta-address {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    text-align: center;
-    font-size: 18px;
-}
+  .cta-trust {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+  }
 
-.cta-address i {
-    color: var(--gold);
-    font-size: 18px;
-}
+  /* Address (Top) */
+  .cta-address {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-align: center;
+      font-size: 18px;
+  }
 
-.cta-address a {
-    color: #fff;
-    text-decoration: none;
-}
+  .cta-address i {
+      color: var(--gold);
+      font-size: 18px;
+  }
 
-/* Phone Row */
-.cta-phones {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+  .cta-address a {
+      color: #fff;
+      text-decoration: none;
+  }
 
-.cta-trust-item {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    font-size: 16px;
-}
+  /* Phone Row */
+  .cta-phones {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
 
-.cta-trust-item i {
-    color: var(--gold);
-    font-size: 16px;
-}
+  .cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 16px;
+  }
 
-.cta-trust-item a {
-    color: #fff;
-    text-decoration: none;
-}
+  .cta-trust-item i {
+      color: var(--gold);
+      font-size: 16px;
+  }
 
-/* Mobile */
-@media (max-width: 600px) {
-    .cta-phones {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
+  .cta-trust-item a {
+      color: #fff;
+      text-decoration: none;
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+      .cta-phones {
+          flex-direction: column;
+          gap: 1rem;
+      }
+  }
+
   footer {
       background: var(--secondary);
       color: rgba(255, 255, 255, .55);
