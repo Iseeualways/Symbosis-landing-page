@@ -107,3 +107,48 @@
         });
 
         window.addEventListener('resize', updateCarousel);
+
+
+
+        const wrapper = document.querySelector(".company-wrapper");
+const tracks = document.querySelector(".company-track");
+const left = document.querySelector(".arrow-left");
+const right = document.querySelector(".arrow-right");
+
+// Duplicate logos for infinite smooth loop
+tracks.innerHTML += tracks.innerHTML;
+
+let speed = 0.6;
+let pause = false;
+
+/* ---- AUTOSCROLL ---- */
+function animate() {
+  if (!pause) {
+    wrapper.scrollLeft += speed;
+
+    if (wrapper.scrollLeft >= tracks.scrollWidth / 2) {
+      wrapper.scrollLeft = 0;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ---- ARROWS ---- */
+const move = 300;
+
+right.onclick = () => {
+  pause = true;
+  wrapper.scrollLeft += move;
+  setTimeout(() => pause = false, 700);
+};
+
+left.onclick = () => {
+  pause = true;
+  wrapper.scrollLeft -= move;
+  setTimeout(() => pause = false, 700);
+};
+
+/* ---- PAUSE ON HOVER ---- */
+wrapper.onmouseenter = () => pause = true;
+wrapper.onmouseleave = () => pause = false;

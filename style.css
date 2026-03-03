@@ -211,9 +211,9 @@
   }
 
   .nav-link-item {
-      color: rgba(0, 0, 0, 0.7) !important;
+      color: rgb(0, 0, 0) !important;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       transition: color .2s;
       padding: .3rem .6rem !important
   }
@@ -1305,28 +1305,65 @@
       transform: translateY(-3px);
       box-shadow: 0 18px 50px rgba(193, 33, 18, .4)
   }
+.cta-trust {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+}
 
-  .cta-trust {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      margin-top: 2.5rem
-  }
+/* Address (Top) */
+.cta-address {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    text-align: center;
+    font-size: 18px;
+}
 
-  .cta-trust-item {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .8rem;
-      color: rgba(255, 255, 255, .45)
-  }
+.cta-address i {
+    color: var(--gold);
+    font-size: 18px;
+}
 
-  .cta-trust-item i {
-      color: var(--gold);
-      font-size: .95rem
-  }
+.cta-address a {
+    color: #fff;
+    text-decoration: none;
+}
 
+/* Phone Row */
+.cta-phones {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cta-trust-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 16px;
+}
+
+.cta-trust-item i {
+    color: var(--gold);
+    font-size: 16px;
+}
+
+.cta-trust-item a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .cta-phones {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
   footer {
       background: var(--secondary);
       color: rgba(255, 255, 255, .55);
