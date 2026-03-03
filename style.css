@@ -450,7 +450,7 @@
       border: 1px solid rgba(255, 255, 255, .12);
       border-radius: var(--radius-sm);
       padding: .65rem 1.1rem;
-      color: white;
+      color: rgb(0, 0, 0);
       font-family: var(--font-body);
       font-size: .9rem;
       outline: none;
@@ -1238,7 +1238,7 @@
   .faq-a-inner {
       padding: 0 1.75rem 1.5rem;
       font-size: .9rem;
-      color: var(--text-muted);
+      color: black;
       line-height: 1.8
   }
 
